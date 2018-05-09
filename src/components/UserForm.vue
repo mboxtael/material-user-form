@@ -18,7 +18,8 @@
           <v-text-field
             :value="name"
             @input="onInput('name', $event)"
-            label="Nombre*"
+            label="Nombre"
+            required
           ></v-text-field>
         </v-flex>
         <v-flex md6>
@@ -65,8 +66,9 @@
           </v-flex>
           <v-flex md-6>
             <v-text-field
-              :value="email"
               label="Correo electrónico"
+              :value="email"
+              :rules="emailRules"
               @input="onInput('email', $event)"
             ></v-text-field>
           </v-flex>
@@ -82,6 +84,7 @@
   import IdentificationsList from './IdentificationsList';
   import PhonesList from './PhonesList';
   import Avatar from './Avatar';
+  import { isEmail } from '../utils/validations';
 
   export default {
     components: {
@@ -91,7 +94,10 @@
       Avatar
     },
     data: () => ({
-      bloodTypes: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'Desconocido']
+      bloodTypes: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'Desconocido'],
+      emailRules: [
+         v => isEmail(v) || 'Ingrese un correo electrónico válido'
+      ]
     }),
     computed: {
       genre: {

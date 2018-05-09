@@ -28,6 +28,8 @@
           :value="phone.phoneNumber"
           label="Teléfono"
           @input="onChange(index, 'phoneNumber', $event)"
+          :mask="maskPhoneNumber"
+          :rules="phoneNumberRules"
         ></v-text-field>
       </v-flex>
     </v-layout>
@@ -41,6 +43,7 @@
 
 <script>
 import { mapMutations, mapState } from 'vuex';
+import { isPhoneNumber } from '../utils/validations';
 
 export default {
   data: () => ({
@@ -49,7 +52,12 @@ export default {
       { value: 'office', icon: 'work' },
       { value: 'house', icon: 'phone' }
     ],
-    countryCodes: ['+58']
+    countryCodes: ['+58'],
+    maskPhoneNumber: '###-#######',
+    phoneNumberRules: [
+      v => v.length == 10 || 'Ingrese un número válido',
+      v => isPhoneNumber(v) || 'Ingrese un número válido'
+    ]
   }),
   mounted() {
     if (this.phones.length == 0) {
