@@ -33,9 +33,13 @@
         </v-flex>
         <v-flex xs12>
           <input type="radio" id="female" value="female" v-model="genre">
-          <label for="female" v-bind:class="{ selected: genre == 'female' }">Femenino</label>
+          <label for="female" v-bind:class="{ selected: genre == 'female' }">
+            <font-awesome-icon icon="female" fixed-width size="lg" /> Femenino
+          </label>
           <input type="radio" id="male" value="male" v-model="genre">
-          <label for="male" v-bind:class="{ selected: genre == 'male' }">Masculino</label>
+          <label for="male" v-bind:class="{ selected: genre == 'male' }">
+            <font-awesome-icon icon="male" fixed-width size="lg" /> Masculino
+          </label>
         </v-flex>
       </v-flex>
     </v-flex>
@@ -118,6 +122,8 @@
 </template>
 
 <script>
+  import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+
   export default {
     data: () => ({
       name: '',
@@ -137,7 +143,10 @@
       phoneType: 'personal',
       countryCodes: ['+58'],
       countryCode: '+58',
-    })
+    }),
+    components: {
+      FontAwesomeIcon
+    }
   };
 </script>
 
