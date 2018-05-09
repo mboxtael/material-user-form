@@ -1,11 +1,12 @@
 <template>
   <v-container class="pl-0 py-0">
     <v-layout row wrap v-for="(phone, index) in phones" :key="index">
-      <v-flex>
+      <v-flex md3>
         <v-select
           :items="phoneTypes"
           :value="phone.type"
           @change="onChange(index, 'type', $event)"
+          label="Teléfono"
         >
           <template slot="selection" slot-scope="data">
             <v-icon>{{data.item.icon}}</v-icon>
@@ -15,18 +16,16 @@
           </template>
         </v-select>
       </v-flex>
-      <v-flex>
+      <v-flex md3>
         <v-select
           :items="countryCodes"
           :value="phone.countryCode"
-          label="Código"
           @change="onChange(index, 'countryCode', $event)"
         ></v-select>
       </v-flex>
-      <v-flex>
+      <v-flex md6>
         <v-text-field
           :value="phone.phoneNumber"
-          label="Teléfono"
           @input="onChange(index, 'phoneNumber', $event)"
           :mask="maskPhoneNumber"
           :rules="phoneNumberRules"

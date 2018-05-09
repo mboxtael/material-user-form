@@ -19,6 +19,7 @@
             :value="name"
             @input="onInput('name', $event)"
             label="Nombre"
+            single-line
             required
           ></v-text-field>
         </v-flex>
@@ -27,6 +28,7 @@
             :value="lastname"
             @input="onInput('lastname', $event)"
             label="Apellidos"
+            single-line
           ></v-text-field>
         </v-flex>
         <v-flex xs12>
