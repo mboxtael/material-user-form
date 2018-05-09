@@ -16,13 +16,15 @@
       <v-flex md10 layout row wrap>
         <v-flex md6>
           <v-text-field
-            v-model="name"
+            :value="name"
+            @input="onInput('name', $event)"
             label="Nombre*"
           ></v-text-field>
         </v-flex>
         <v-flex md6>
           <v-text-field
-            v-model="lastname"
+            :value="lastname"
+            @input="onInput('lastname', $event)"
             label="Apellidos"
           ></v-text-field>
         </v-flex>
@@ -74,6 +76,7 @@
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
   import IdentificationsList from './IdentificationsList';
   import PhonesList from './PhonesList';
@@ -87,13 +90,23 @@
       Avatar
     },
     data: () => ({
-      name: '',
-      lastname: '',
       email: '',
       genre: '',
       bloodTypes: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'Desconocido'],
       bloodTypeSelected: ''
-    })
+    }),
+    computed: {
+      
+      ...mapState([
+        'name',
+        'lastname'
+      ])
+    },
+    methods: {
+      onInput(path, value) {
+        this.$store.commit('updateUser', { value, path });
+      }
+    }
   };
 </script>
 
