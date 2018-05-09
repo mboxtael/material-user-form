@@ -32,7 +32,7 @@ export default {
   data: () => ({
     identificationTypes: [
       { text: 'Cédula', value: 'national-id' },
-      { text: 'Carnet de conducir', value: 'drive-id' }
+      { text: 'RIF', value: 'rif' }
     ]
   }),
   mounted() {

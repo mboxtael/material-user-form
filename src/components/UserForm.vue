@@ -58,7 +58,7 @@
       </v-container>
     </v-flex>
     <v-flex xs12>
-      <v-card-title class="pb-0">
+      <v-card-title>
         <h3>Datos de contacto</h3>
       </v-card-title>
       <v-container class="pt-0">
@@ -151,7 +151,7 @@
   }
 
   input[type='radio'] ~ label {
-    margin-right: 10px;
+    margin-right: 5px;
   }
 </style>
 
