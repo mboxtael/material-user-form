@@ -43,64 +43,37 @@
         </v-flex>
       </v-flex>
     </v-flex>
-    <v-flex xs12>
+    <v-flex xs12 layout>
       <identifications-list />
     </v-flex>
     <v-flex xs12 layout row wrap>
-      <v-flex xs12>
-        <v-card-text>Tipo de sangre</v-card-text>
-      </v-flex>
-      <v-flex layout>
-        <div v-for="(bloodType, index) in bloodTypes" :key="index">
-          <input type="radio" :id="bloodType" :value="bloodType" v-model="bloodTypeSelected">
-          <label :for="bloodType" :class="{ selected: bloodType == bloodTypeSelected }">{{bloodType}}</label>
-        </div>
-      </v-flex>
+      <v-container class="pt-0">
+        <v-card-text class="pl-0">Tipo de sangre</v-card-text>
+        <v-layout row wrap>
+          <div v-for="(bloodType, index) in bloodTypes" :key="index">
+            <input type="radio" :id="bloodType" :value="bloodType" v-model="bloodTypeSelected">
+            <label :for="bloodType" :class="{ selected: bloodType == bloodTypeSelected }">{{bloodType}}</label>
+          </div>
+        </v-layout>
+      </v-container>
     </v-flex>
-    <v-flex xs12 layout row wrap>
-      <v-flex xs12>
-        <v-card-title>
-          <h3>Datos de contacto</h3>
-        </v-card-title>
-      </v-flex>
-      <v-flex md6 layout>
-        <v-flex>
-          <v-select
-            :items="phoneTypes"
-            v-model="phoneType"
-          >
-            <template slot="selection" slot-scope="data">
-              <v-icon>{{data.item.icon}}</v-icon>
-            </template>
-            <template slot="item" slot-scope="data">
-              <v-icon>{{data.item.icon}}</v-icon>
-            </template>
-          </v-select>
-        </v-flex>
-        <v-flex>
-          <v-select
-            :items="countryCodes"
-            v-model="countryCode"
-            label="Code"
-            single-line
-          ></v-select>
-        </v-flex>
-        <v-flex>
-          <v-text-field
-            v-model="phoneNumber"
-            label="Teléfono"
-          ></v-text-field>
-        </v-flex>
-      </v-flex>
-      <v-flex md-6 layout>
-        <v-text-field
-          v-model="email"
-          label="Correo electrónico"
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs12>
-        <p>Agregar otro teléfono</p>
-      </v-flex>
+    <v-flex xs12>
+      <v-card-title>
+        <h3>Datos de contacto</h3>
+      </v-card-title>
+      <v-container class="pt-0">
+        <v-layout row wrap>
+          <v-flex md6>
+            <phones-list />
+          </v-flex>
+          <v-flex md-6>
+            <v-text-field
+              v-model="email"
+              label="Correo electrónico"
+            ></v-text-field>
+          </v-flex>
+        </v-layout>
+      </v-container>
     </v-flex>
   </v-flex>
 </template>
@@ -108,29 +81,22 @@
 <script>
   import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
   import IdentificationsList from './IdentificationsList';
+  import PhonesList from './PhonesList';
 
   export default {
+    components: {
+      FontAwesomeIcon,
+      IdentificationsList,
+      PhonesList
+    },
     data: () => ({
       name: '',
       lastname: '',
       email: '',
       genre: '',
       bloodTypes: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'Desconocido'],
-      bloodTypeSelected: '',
-      phoneTypes: [
-        { value: 'personal', icon: 'smartphone' },
-        { value: 'office', icon: 'work' },
-        { value: 'house', icon: 'phone' }
-      ],
-      phoneType: 'personal',
-      countryCodes: ['+58'],
-      countryCode: '+58',
-      phoneNumber: ''
-    }),
-    components: {
-      FontAwesomeIcon,
-      IdentificationsList
-    }
+      bloodTypeSelected: ''
+    })
   };
 </script>
 

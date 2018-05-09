@@ -1,6 +1,6 @@
 <template>
-  <v-flex>
-    <v-flex layout v-for="(identification, index) in identifications" :key="index">
+  <v-container>
+    <v-layout v-for="(identification, index) in identifications" :key="index">
       <v-flex md6>
         <v-select
           :items="identificationTypes"
@@ -14,11 +14,13 @@
           label="Número de identificación"
         ></v-text-field>
       </v-flex>
-    </v-flex>
-    <v-flex layout>
-      <p class="action" @click="addIdentification()">Agregar otra identificación</p>
-    </v-flex>
-  </v-flex>
+    </v-layout>
+    <v-layout>
+      <v-flex xs12>
+        <span class="action" @click="addIdentification()">Agregar otra identificación</span>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
@@ -42,7 +44,7 @@
 </script>
 
 <style scoped>
-  p.action {
+  span.action {
     text-transform: uppercase;
     color: #27c6da;
     cursor: pointer;
