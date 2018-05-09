@@ -11,12 +11,7 @@
         align-center
         justify-center
       >
-        <v-avatar
-          color="grey lighten-4"
-          size="64"
-        >
-          <img src="/public/v.png" alt="avatar">
-        </v-avatar>
+        <avatar />
       </v-flex>
       <v-flex md10 layout row wrap>
         <v-flex md6>
@@ -46,19 +41,19 @@
     <v-flex xs12 layout>
       <identifications-list />
     </v-flex>
-    <v-flex xs12 layout row wrap>
+    <v-flex xs12 layout>
       <v-container class="pt-0">
-        <v-card-text class="pl-0">Tipo de sangre</v-card-text>
-        <v-layout row wrap>
-          <div v-for="(bloodType, index) in bloodTypes" :key="index">
+        <v-card-text class="pl-0 pt-0">Tipo de sangre</v-card-text>
+        <v-flex row wrap layout>
+          <div d-block v-for="(bloodType, index) in bloodTypes" :key="index">
             <input type="radio" :id="bloodType" :value="bloodType" v-model="bloodTypeSelected">
             <label :for="bloodType" :class="{ selected: bloodType == bloodTypeSelected }">{{bloodType}}</label>
           </div>
-        </v-layout>
+        </v-flex>
       </v-container>
     </v-flex>
     <v-flex xs12>
-      <v-card-title>
+      <v-card-title class="pb-0">
         <h3>Datos de contacto</h3>
       </v-card-title>
       <v-container class="pt-0">
@@ -82,12 +77,14 @@
   import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
   import IdentificationsList from './IdentificationsList';
   import PhonesList from './PhonesList';
+  import Avatar from './Avatar';
 
   export default {
     components: {
       FontAwesomeIcon,
       IdentificationsList,
-      PhonesList
+      PhonesList,
+      Avatar
     },
     data: () => ({
       name: '',
