@@ -5,7 +5,8 @@
       size="64"
     >
       <img :src="avatar" alt="avatar">
-      <input type="file" @change="onChange"/>
+      <input type="file" @change="onChange" title="Click para cambiar avatar"/>
+      <font-awesome-icon class="camera" icon="camera" size="2x" />
     </v-avatar>
   </div>
 </template>
@@ -49,11 +50,30 @@ export default {
 };
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 input {
   opacity: 0;
   position: absolute;
   height: 100%;
+  width: 100%;
+  z-index: 2;
+}
+
+.avatar:hover {
+  opacity: 0.5;
+  color: #000;
+  z-index: 0;
+
+  .camera {
+    display: block;
+  }
+}
+
+.camera {
+  display: none;
+  position: absolute;
+  z-index: 1;
+  opacity: 0.8;
 }
 </style>
 
