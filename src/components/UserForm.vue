@@ -43,24 +43,8 @@
         </v-flex>
       </v-flex>
     </v-flex>
-    <v-flex xs12 layout row wrap>
-      <v-flex md6>
-        <v-select
-          :items="identificationTypes"
-          v-model="identificationType"
-          label="Tipo de identificación"
-          single-line
-        ></v-select>
-      </v-flex>
-      <v-flex md-6>
-        <v-text-field
-          v-model="identification"
-          label="Número de identificación"
-        ></v-text-field>
-      </v-flex>
-      <v-flex xs12>
-        <p>Agregar otra identificación</p>
-      </v-flex>
+    <v-flex xs12>
+      <identifications-list />
     </v-flex>
     <v-flex xs12 layout row wrap>
       <v-flex xs12>
@@ -103,7 +87,7 @@
         </v-flex>
         <v-flex>
           <v-text-field
-            v-model="identificationType"
+            v-model="phoneNumber"
             label="Teléfono"
           ></v-text-field>
         </v-flex>
@@ -123,6 +107,7 @@
 
 <script>
   import FontAwesomeIcon from '@fortawesome/vue-fontawesome';
+  import IdentificationsList from './IdentificationsList';
 
   export default {
     data: () => ({
@@ -130,9 +115,6 @@
       lastname: '',
       email: '',
       genre: '',
-      identificationTypes: [{ text: 'Cédula' }, { text: 'Carnet de conducir' }],
-      identificationType: '',
-      identification: '',
       bloodTypes: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'Desconocido'],
       bloodTypeSelected: '',
       phoneTypes: [
@@ -143,9 +125,11 @@
       phoneType: 'personal',
       countryCodes: ['+58'],
       countryCode: '+58',
+      phoneNumber: ''
     }),
     components: {
-      FontAwesomeIcon
+      FontAwesomeIcon,
+      IdentificationsList
     }
   };
 </script>
