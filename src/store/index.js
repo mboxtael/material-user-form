@@ -7,7 +7,10 @@ Vue.use(Vuex);
 
 const state = {
   name: '',
-  lastname: ''
+  lastname: '',
+  genre: '',
+  bloodType: '',
+  email: ''
 };
 
 const store = new Vuex.Store({

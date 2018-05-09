@@ -65,8 +65,9 @@
           </v-flex>
           <v-flex md-6>
             <v-text-field
-              v-model="email"
+              :value="email"
               label="Correo electrónico"
+              @input="onInput('email', $event)"
             ></v-text-field>
           </v-flex>
         </v-layout>
@@ -90,16 +91,29 @@
       Avatar
     },
     data: () => ({
-      email: '',
-      genre: '',
-      bloodTypes: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'Desconocido'],
-      bloodTypeSelected: ''
+      bloodTypes: ['O+', 'O-', 'A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'Desconocido']
     }),
     computed: {
-      
+      genre: {
+        get() {
+          return this.$store.state.genre;
+        },
+        set(value) {
+          this.$store.commit('updateUser', { value, path: 'genre' });
+        }
+      },
+      bloodTypeSelected: {
+        get() {
+          return this.$store.state.bloodType;
+        },
+        set(value) {
+          this.$store.commit('updateUser', { value, path: 'bloodType' });
+        }
+      },
       ...mapState([
         'name',
-        'lastname'
+        'lastname',
+        'email'
       ])
     },
     methods: {
