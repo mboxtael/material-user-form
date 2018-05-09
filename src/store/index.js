@@ -12,7 +12,8 @@ const state = {
   bloodType: '',
   email: '',
   identifications: [],
-  phones: []
+  phones: [],
+  avatarSrc: null
 };
 
 const store = new Vuex.Store({
