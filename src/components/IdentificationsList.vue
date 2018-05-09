@@ -4,13 +4,15 @@
       <v-flex md6>
         <v-select
           :items="identificationTypes"
-          v-model="identification.type"
+          :value="identification.type"
+          @change="onChange(index, 'type', $event)"
           label="Tipo de identificación"
         ></v-select>
       </v-flex>
       <v-flex md-6>
         <v-text-field
-          v-model="identification.number"
+          :value="identification.number"
+          @input="onChange(index, 'number', $event)"
           label="Número de identificación"
         ></v-text-field>
       </v-flex>
@@ -24,30 +26,37 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      identificationTypes: [
-        { text: 'Cédula', value: 'national-id' },
-        { text: 'Carnet de conducir', value: 'drive-id' }
-      ],
-      identifications: [],
-    }),
-    mounted() {
+import { mapMutations, mapState } from 'vuex';
+
+export default {
+  data: () => ({
+    identificationTypes: [
+      { text: 'Cédula', value: 'national-id' },
+      { text: 'Carnet de conducir', value: 'drive-id' }
+    ]
+  }),
+  mounted() {
+    if (this.identifications.length == 0) {
       this.addIdentification();
-    },
-    methods: {
-      addIdentification() {
-        this.identifications.push({ type: 'national-id', number: '' })
-      }
+    }
+  },
+  computed: {
+    ...mapState(['identifications'])
+  },
+  methods: {
+    ...mapMutations(['addIdentification', 'updateIdentification']),
+    onChange(index, path, value) {
+      this.updateIdentification({ index, path, value });
     }
   }
+};
 </script>
 
 <style scoped>
-  span.action {
-    text-transform: uppercase;
-    color: #27c6da;
-    cursor: pointer;
-    font-weight: 500;
-  }
+span.action {
+  text-transform: uppercase;
+  color: #27c6da;
+  cursor: pointer;
+  font-weight: 500;
+}
 </style>

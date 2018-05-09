@@ -4,7 +4,8 @@
       <v-flex>
         <v-select
           :items="phoneTypes"
-          v-model="phone.type"
+          :value="phone.type"
+          @change="onChange(index, 'type', $event)"
         >
           <template slot="selection" slot-scope="data">
             <v-icon>{{data.item.icon}}</v-icon>
@@ -17,15 +18,16 @@
       <v-flex>
         <v-select
           :items="countryCodes"
-          v-model="phone.countryCode"
-          label="Code"
-          single-line
+          :value="phone.countryCode"
+          label="Código"
+          @change="onChange(index, 'countryCode', $event)"
         ></v-select>
       </v-flex>
       <v-flex>
         <v-text-field
-          v-model="phone.phoneNumber"
+          :value="phone.phoneNumber"
           label="Teléfono"
+          @input="onChange(index, 'phoneNumber', $event)"
         ></v-text-field>
       </v-flex>
     </v-layout>
@@ -38,34 +40,41 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      phoneTypes: [
-        { value: 'personal', icon: 'smartphone' },
-        { value: 'office', icon: 'work' },
-        { value: 'house', icon: 'phone' }
-      ],
-      countryCodes: ['+58'],
-      phones: []
-    }),
-    mounted() {
+import { mapMutations, mapState } from 'vuex';
+
+export default {
+  data: () => ({
+    phoneTypes: [
+      { value: 'personal', icon: 'smartphone' },
+      { value: 'office', icon: 'work' },
+      { value: 'house', icon: 'phone' }
+    ],
+    countryCodes: ['+58']
+  }),
+  mounted() {
+    if (this.phones.length == 0) {
       this.addPhone();
-    },
-    methods: {
-      addPhone() {
-        this.phones.push({ type: 'personal', countryCode: '+58', phoneNumber: '' });
-      }
+    }
+  },
+  computed: {
+    ...mapState(['phones'])
+  },
+  methods: {
+    ...mapMutations(['addPhone', 'updatePhone']),
+    onChange(index, path, value) {
+      this.updatePhone({ index, path, value });
     }
   }
+};
 </script>
 
 <style>
-  span.action {
-    text-transform: uppercase;
-    color: #27c6da;
-    cursor: pointer;
-    font-weight: 500;
-  }
+span.action {
+  text-transform: uppercase;
+  color: #27c6da;
+  cursor: pointer;
+  font-weight: 500;
+}
 </style>
 
 

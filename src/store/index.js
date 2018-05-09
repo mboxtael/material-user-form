@@ -10,7 +10,9 @@ const state = {
   lastname: '',
   genre: '',
   bloodType: '',
-  email: ''
+  email: '',
+  identifications: [],
+  phones: []
 };
 
 const store = new Vuex.Store({
